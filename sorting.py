@@ -213,3 +213,22 @@ def quick_sort(xs, cmp=cmp_standard):
     You should directly modify the input xs
     variable instead of returning a copy of the list.
     '''
+    if len(xs) == 1 or len(xs) == 0:
+        return xs
+    else:
+        hi = len(xs) - 1
+        lo = 0
+
+        while lo < hi:
+            for j in range(len(xs)-1):
+                if cmp(xs[j], xs[hi]) == -1:
+                    t = xs[j]
+                    xs[j] = xs[lo]
+                    xs[lo] = t
+                    lo += 1
+            t = xs[hi]
+            xs[hi] = xs[lo]
+            xs[lo] = t
+            xs[:lo] = quick_sort(xs[:lo], cmp)
+            xs[lo + 1:] = quick_sort(xs[lo + 1], cmp)
+            return xs
