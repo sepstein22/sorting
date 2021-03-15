@@ -12,6 +12,7 @@ if cmp(a, b) returns  0, then a == b.
 '''
 
 from copy import deepcopy
+import random
 
 
 def cmp_standard(a, b):
@@ -170,19 +171,19 @@ def quick_sorted(xs, cmp=cmp_standard):
     lower = []
     equal = []
 
-    if len(xs) == 1:
+    if len(xs) == 1 or len(xs) == 0:
         return xs
     else:
-        pivot = xs[1]
-        for i in xs:
-            if i > pivot:
-                higher.append(i)
-            if i < pivot:
-                lower.append(i)
+        pivot = random.choices(xs)[0]
+        for i in range(len(xs)):
+            if cmp(xs[i], pivot) == 1:
+                higher.append(xs[i])
+            elif cmp(xs[i], pivot) == -1:
+                lower.append(xs[i])
             else:
-                equal.append(i)
-        less_than = quick_sorted(lower, cmp=cmp_standard)
-        greater_than = quick_sorted(higher, cmp=cmp_standard)
+                equal.append(xs[i])
+        less_than = quick_sorted(lower, cmp)
+        greater_than = quick_sorted(higher, cmp)
 
     return less_than + equal + greater_than
 
