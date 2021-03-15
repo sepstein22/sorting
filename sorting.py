@@ -11,7 +11,6 @@ if cmp(a, b) returns  1, then a > b;
 if cmp(a, b) returns  0, then a == b.
 '''
 
-import random
 from copy import deepcopy
 
 
@@ -220,7 +219,7 @@ def quick_sort(xs, cmp=cmp_standard):
         lo = 0
 
         while lo < hi:
-            for j in range(len(xs)-1):
+            for j in range(len(xs) - 1):
                 if cmp(xs[j], xs[hi]) == -1:
                     t = xs[j]
                     xs[j] = xs[lo]
